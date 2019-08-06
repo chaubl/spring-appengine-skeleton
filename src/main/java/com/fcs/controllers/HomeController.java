@@ -1,9 +1,8 @@
-package com.fcs.controller;
+package com.fcs.controllers;
 
 import java.util.concurrent.ExecutionException;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
