@@ -1,12 +1,12 @@
 # Spring project skeleton 
 
-Spring project skeleton that can run alone , in servlet container (tomcat,jetty,etc ..) , or in appengine ( include both Standard and Flexible enviroment)
+Spring project mysql skeleton that can run alone , in servlet container (tomcat,jetty,etc ..) 
 
 
 ## Getting Started
 ### Clone this repository
 ```
-git clone https://github.com/ngocbd/spring-appengine-skeleton.git
+git clone https://github.com/ngocbd/spring-mysql-skeleton.git
 ```
 
 ### Prerequisites
@@ -17,27 +17,4 @@ git clone https://github.com/ngocbd/spring-appengine-skeleton.git
 ### Run alone
 ```
 mvn clean package spring-boot:run
-```
-
-### Run in appengine local development
-```
-mvn clean package appengine:run
-```
-
-
-### Deploy to appengine Standard
-
-
-```
-mvn clean package appengine:deploy
-
-```
-
-### Deploy to appengine Flexible
-
-Create file app.yaml and deploy
-
-```
-mvn clean package appengine:deploy
-
 ```
