@@ -1,4 +1,4 @@
-# Spring project skeleton 
+# Spring mysql skeleton project
 
 Spring project mysql skeleton that can run alone , in servlet container (tomcat,jetty,etc ..) 
 
