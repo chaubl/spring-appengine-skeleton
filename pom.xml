@@ -27,6 +27,10 @@
 
 	<dependencies>
 		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-batch</artifactId>
+        </dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
@@ -45,7 +49,17 @@
 			<scope>provided</scope>
 		</dependency>
 		
-
+		<dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        
 		<!-- add following dependency under dependencies section -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -59,11 +73,31 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
+		<!-- Spring jdbc, for database -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+		</dependency>
+
         <!-- Use MySQL Connector-J -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
+        
+        <dependency>
+		  <!-- jsoup HTML parser library @ https://jsoup.org/ -->
+		  <groupId>org.jsoup</groupId>
+		  <artifactId>jsoup</artifactId>
+		  <version>1.12.1</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.google.cloud/google-cloud-bigquery -->
+		<dependency>
+		    <groupId>com.google.cloud</groupId>
+		    <artifactId>google-cloud-bigquery</artifactId>
+		    <version>1.85.0</version>
+		</dependency>				
 		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -73,8 +107,7 @@
 	</dependencies>
 
 	<build>
-		<plugins>
-			
+		<plugins>			
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>

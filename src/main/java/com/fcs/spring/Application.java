@@ -11,12 +11,15 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 
+import com.fcs.services.InsertProjectThread;
+
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 
 @SpringBootApplication
 @EntityScan("com.fcs.models")
 @ComponentScan("com.fcs.controllers")
 @EnableJpaRepositories("com.fcs.repositories")
+@ComponentScan(basePackages="com.fcs.services")
 
 public class Application {
 
@@ -25,7 +28,7 @@ public class Application {
 		ApplicationContext applicationContext = SpringApplication.run(Application.class, args);
 		for (String name : applicationContext.getBeanDefinitionNames()) {
 			System.out.println(name);
-		}
+		}	
 	}
 
 	@Bean
