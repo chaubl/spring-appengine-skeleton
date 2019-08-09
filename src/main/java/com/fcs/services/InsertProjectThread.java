@@ -27,12 +27,15 @@ public class InsertProjectThread extends Thread {
 
 	@Override
 	public void run() {
-		System.out.println("InsertProjectThread is running");
+		int page = Integer.valueOf(getName());
+		System.out.println("InsertProjectThread is running page:"+page);
+		int limit = 100;
+		int offset = page*limit;
 				
 		BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
 		QueryJobConfiguration queryConfig = QueryJobConfiguration
 				.newBuilder(
-						"SELECT * FROM `bigquery-public-data.libraries_io.projects_with_repository_fields` ORDER BY id LIMIT 5000 OFFSET 0")
+						"SELECT * FROM `bigquery-public-data.libraries_io.projects_with_repository_fields` ORDER BY id LIMIT "+limit+" OFFSET "+offset)
 				// Use standard SQL syntax for queries.
 				// See: https://cloud.google.com/bigquery/sql-reference/
 				.setUseLegacySql(false).build();

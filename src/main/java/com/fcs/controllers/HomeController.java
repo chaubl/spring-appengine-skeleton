@@ -5,6 +5,7 @@ import java.util.concurrent.ExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fcs.repositories.ProjectRepository;
 import com.fcs.services.InsertProjectThread;
@@ -21,9 +22,11 @@ public class HomeController {
 	}
 
 	@GetMapping(value = "/welcome")
-	public String welcome() throws InterruptedException, ExecutionException {
+	public String welcome(@RequestParam String page) throws InterruptedException, ExecutionException {
+		System.out.println("page:"+page);
 		InsertProjectThread projectThread = new InsertProjectThread();
 		projectThread.projectRepository=projectRepository;
+		projectThread.setName(page);
 		projectThread.start();
 		return "welcome";
 	}
