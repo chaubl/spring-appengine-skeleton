@@ -6,7 +6,7 @@ Spring project mysql skeleton that can run alone , in servlet container (tomcat,
 ## Getting Started
 ### Clone this repository
 ```
-git clone https://github.com/ngocbd/spring-mysql-skeleton.git
+git clone https://github.com/chaubl/spring-mysql-skeleton.git
 ```
 
 ### Prerequisites
