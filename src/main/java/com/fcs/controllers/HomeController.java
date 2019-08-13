@@ -22,7 +22,7 @@ public class HomeController {
 	}
 
 	@GetMapping(value = "/welcome")
-	public String welcome(@RequestParam String page) throws InterruptedException, ExecutionException {
+	public String welcome(@RequestParam String page) {
 		System.out.println("page:"+page);
 		InsertProjectThread projectThread = new InsertProjectThread();
 		projectThread.projectRepository=projectRepository;

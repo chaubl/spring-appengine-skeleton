@@ -29,13 +29,13 @@ public class InsertProjectThread extends Thread {
 	public void run() {
 		int page = Integer.valueOf(getName());
 		System.out.println("InsertProjectThread is running page:"+page);
-		int limit = 100;
+		int limit = 10000;
 		int offset = page*limit;
 				
 		BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
 		QueryJobConfiguration queryConfig = QueryJobConfiguration
 				.newBuilder(
-						"SELECT * FROM `bigquery-public-data.libraries_io.projects_with_repository_fields` ORDER BY id LIMIT "+limit+" OFFSET "+offset)
+						"SELECT * FROM `bigquery-public-data.libraries_io.projects_with_repository_fields` LIMIT "+limit+" OFFSET "+offset)
 				// Use standard SQL syntax for queries.
 				// See: https://cloud.google.com/bigquery/sql-reference/
 				.setUseLegacySql(false).build();
@@ -69,7 +69,8 @@ public class InsertProjectThread extends Thread {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
+		int count = 0;
+		int error = 0;
 		ArrayList<Project> listProjects = new ArrayList<Project>();
 		// Print all pages of the results.
 		for (FieldValueList row : result.iterateAll()) {
@@ -103,7 +104,10 @@ public class InsertProjectThread extends Thread {
 			}
 			
 			try {
-				project.setHomepage_url(row.get("homepage_url").getStringValue());
+				String string = row.get("homepage_url").getStringValue();
+				if(string.length()<254) {
+					project.setHomepage_url(string);
+				}
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -115,7 +119,10 @@ public class InsertProjectThread extends Thread {
 			}
 			
 			try {
-				project.setRepository_url(row.get("repository_url").getStringValue());
+				String string = row.get("repository_url").getStringValue();
+				if(string.length()<254) {
+					project.setRepository_url(string);
+				}
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -210,8 +217,11 @@ public class InsertProjectThread extends Thread {
 				// TODO: handle exception
 			}
 
-			try {
-				project.setRepository_homepage_url(row.get("repository_homepage_url").getStringValue());
+			try {				
+				String string = row.get("repository_homepage_url").getStringValue();
+				if(string.length()<254) {
+					project.setRepository_homepage_url(string);
+				}
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -259,7 +269,10 @@ public class InsertProjectThread extends Thread {
 			}
 
 			try {
-				project.setRepository_mirror_url(row.get("repository_mirror_url").getStringValue());
+				String string = row.get("repository_mirror_url").getStringValue();
+				if(string.length()<254) {
+					project.setRepository_mirror_url(string);
+				}
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -379,34 +392,34 @@ public class InsertProjectThread extends Thread {
 			}
 
 			try {
-				project.setRepository_logo_url(row.get("repository_logo_url").getStringValue());
+				String string = row.get("repository_keywords").getStringValue();
+				if(string.length()<254) {
+					project.setRepository_logo_url(string);
+				}
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
 
 			try {
-				project.setRepository_keywords(row.get("repository_keywords").getStringValue());
+				project.setRepository_keywords(row.get("bh").getStringValue());
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
 
+			
 			try {
-				project.setBh(row.get("repository_keywords").getStringValue());
+				if(projectRepository.save(project) != null) {
+					count++;
+				}
 			} catch (Exception e) {
-				// TODO: handle exception
+				error++;
 			}
-
-			listProjects.add(project);
+			//listProjects.add(project);
 		}
 		
-		projectRepository.saveAll(listProjects);
-		System.out.println("listProjects:"+listProjects.size());
-
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		//projectRepository.saveAll(listProjects);
+		System.out.println("Page:"+page+"|save:"+count+"|error:"+error);
+		
 		Thread.currentThread().stop();
 	}
 }

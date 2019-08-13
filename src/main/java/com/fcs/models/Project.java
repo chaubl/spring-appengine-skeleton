@@ -68,7 +68,6 @@ public class Project {
 	private String repository_logo_url;
 	@Lob
 	private String repository_keywords;
-	private String bh;
 	
 	public String getId() {
 		return id;
@@ -399,11 +398,5 @@ public class Project {
 	}
 	public void setRepository_keywords(String repository_keywords) {
 		this.repository_keywords = repository_keywords;
-	}
-	public String getBh() {
-		return bh;
-	}
-	public void setBh(String bh) {
-		this.bh = bh;
 	}
 }
